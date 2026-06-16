@@ -13,7 +13,7 @@ import { db } from "../firebase/config";
 //Todas las funciones van a utilizar esta coleccion.
 //La hacemos global y que todas la usen en vez defirla varias veces
 // Creamos la referencia a la coleccion: en mi caso se llama "products"
-const productsRef = collection(db, "productsTP");
+const productsRef = collection(db, "products");
 
 /* -------------------------------------------------------------------------- */
 /*                               TRAER PRODUCTOS                              */
@@ -40,7 +40,7 @@ export const getProducts = async () => {
 export const getProductById = async (id) => {
   try {
     // Creamos la referencia al documento
-    const productRef = doc(db, "productsTP", id);
+    const productRef = doc(db, "products", id);
 
     // Traemos el documento:
     const snapshot = await getDoc(productRef);
@@ -66,6 +66,7 @@ export const getByCategory = async (category) => {
   try {
     let queryRef;
 
+    //truthy
     if (category) {
       queryRef = query(productsRef, where("category", "==", category));
     } else {
@@ -82,5 +83,20 @@ export const getByCategory = async (category) => {
   } catch (error) {
     console.error("Error al filtrar productos:", error);
     return [];
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              ALTA DE PRODUCTO                              */
+/* -------------------------------------------------------------------------- */
+export const createProduct = async (productData) => {
+  try {
+    //Tan facil como usar la funcion addDoc y pasarle la coleccion y el doc a agregar
+    const docRef = await addDoc(productsRef, productData);
+
+    return docRef.id; // opcional, por si quieren usar el id para algo
+  } catch (error) {
+    console.error("Error al crear producto:", error);
+    throw error;
   }
 };
