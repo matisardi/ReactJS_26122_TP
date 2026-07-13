@@ -13,7 +13,7 @@ import { db } from "../firebase/config";
 //Todas las funciones van a utilizar esta coleccion.
 //La hacemos global y que todas la usen en vez defirla varias veces
 // Creamos la referencia a la coleccion: en mi caso se llama "products"
-const productsRef = collection(db, "products");
+const productsRef = collection(db, "productsTP");
 
 /* -------------------------------------------------------------------------- */
 /*                               TRAER PRODUCTOS                              */
@@ -40,7 +40,7 @@ export const getProducts = async () => {
 export const getProductById = async (id) => {
   try {
     // Creamos la referencia al documento
-    const productRef = doc(db, "products", id);
+    const productRef = doc(db, "productsTP", id);
 
     // Traemos el documento:
     const snapshot = await getDoc(productRef);

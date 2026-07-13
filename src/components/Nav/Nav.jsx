@@ -9,28 +9,33 @@ export const Nav = () => {
   const totalItems = getTotalItems();
 
   return (
-    <nav>
-      {/* <ul className={styles["nav-list"]}> */}
-      <ul className="nav-list">
-        <li>
-          <Link to={"/"}>Home</Link>
-        </li>
-        <li>
-          <Link to={"/category/notebook"}>Notebook</Link>
-        </li>
-        <li>
-          <Link to={"/category/nuc"}>NUC</Link>
-        </li>
-        <li>
-          <Link to={"/category/pc"}>PC</Link>
-        </li>
-        <li>
-          <Link to={"/carrito"}>
-            Carrito
-            {totalItems > 0 && <span className="incart">{totalItems}</span>}
-          </Link>
-        </li>
-      </ul>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary nav-list">
+      <div className="container-fluid">
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link active" aria-current="page" to={"/"}>Home</Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categoría
+              </a>
+              <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" to={"/category/pc"}>PC</Link></li>
+                <li><Link className="dropdown-item" to={"/category/nuc"}>NUC</Link></li>
+                <li><Link className="dropdown-item" to={"/category/notebook"}>Notebook</Link></li>
+                <li><Link className="dropdown-item" to={"/category/server"}>Server</Link></li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to={"/carrito"}>
+                Carrito
+                {totalItems > 0 && <span className="incart">{totalItems}</span>}
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
   );
 };
